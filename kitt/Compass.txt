@@ -11,9 +11,8 @@ int step10
 { how to write a message on kitts message board 
 10 blocks Left to right 
 "Message" is the name of the frame then character, lastly block
-36 total characters, spaces are named blank, (five)5 = letter s , (Zero)0 = letter o
+35 total characters, (five)5 = letter s , (Zero)0 = letter o
 example "Message05" would place a 0 in the 5th block from the left 
-be sure to hide the blanks before putting a message in!
 }
 
 
@@ -112,23 +111,16 @@ while true
 return
 
 :NorthMessage
-
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageH1" visible 1 
 3F10: set_car vehicle component "MessageE2" visible 1
 3F10: set_car vehicle component "MessageA3" visible 1
 3F10: set_car vehicle component "MessageD4" visible 1
-3F10: set_car vehicle component "MessageI5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageI5" visible 1
 3F10: set_car vehicle component "MessageN6" visible 1
 3F10: set_car vehicle component "MessageG7" visible 1
-3F10: set_car vehicle component "MessageBLANK8" visible 1
 3F10: set_car vehicle component "MessageN9" visible 1
-3F10: set_car vehicle component "MessageBLANK10" visible 1
 WAIT 10
 //glow for message to display
 3F18: set_car vehicle component "MessageH1" glow 1
@@ -143,21 +135,15 @@ wait 0
 return
 
 :NorthWestMessage
-
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageH1" visible 1 
 3F10: set_car vehicle component "MessageE2" visible 1
 3F10: set_car vehicle component "MessageA3" visible 1
 3F10: set_car vehicle component "MessageD4" visible 1
-3F10: set_car vehicle component "MessageI5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageI5" visible 1
 3F10: set_car vehicle component "MessageN6" visible 1
 3F10: set_car vehicle component "MessageG7" visible 1
-3F10: set_car vehicle component "MessageBLANK8" visible 1
 3F10: set_car vehicle component "MessageN9" visible 1
 3F10: set_car vehicle component "MessageW10" visible 1
 WAIT 10
@@ -175,21 +161,15 @@ wait 0
 return
 
 :NorthEastMessage
-
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageH1" visible 1 
 3F10: set_car vehicle component "MessageE2" visible 1
 3F10: set_car vehicle component "MessageA3" visible 1
 3F10: set_car vehicle component "MessageD4" visible 1
-3F10: set_car vehicle component "MessageI5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageI5" visible 1
 3F10: set_car vehicle component "MessageN6" visible 1
 3F10: set_car vehicle component "MessageG7" visible 1
-3F10: set_car vehicle component "MessageBLANK8" visible 1
 3F10: set_car vehicle component "MessageN9" visible 1
 3F10: set_car vehicle component "MessageE10" visible 1
 WAIT 10
@@ -207,21 +187,15 @@ wait 0
 return
 
 :SouthWestMessage
-
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageH1" visible 1 
 3F10: set_car vehicle component "MessageE2" visible 1
 3F10: set_car vehicle component "MessageA3" visible 1
 3F10: set_car vehicle component "MessageD4" visible 1
-3F10: set_car vehicle component "MessageI5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageI5" visible 1
 3F10: set_car vehicle component "MessageN6" visible 1
 3F10: set_car vehicle component "MessageG7" visible 1
-3F10: set_car vehicle component "MessageBLANK8" visible 1
 3F10: set_car vehicle component "Message59" visible 1
 3F10: set_car vehicle component "MessageW10" visible 1
 WAIT 10
@@ -239,21 +213,15 @@ wait 0
 return
 
 :SouthEastMessage
-
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageH1" visible 1 
 3F10: set_car vehicle component "MessageE2" visible 1
 3F10: set_car vehicle component "MessageA3" visible 1
 3F10: set_car vehicle component "MessageD4" visible 1
-3F10: set_car vehicle component "MessageI5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageI5" visible 1 
 3F10: set_car vehicle component "MessageN6" visible 1
 3F10: set_car vehicle component "MessageG7" visible 1
-3F10: set_car vehicle component "MessageBLANK8" visible 1
 3F10: set_car vehicle component "Message59" visible 1
 3F10: set_car vehicle component "MessageE10" visible 1
 WAIT 10
@@ -272,23 +240,16 @@ return
 
 
 :SouthMessage
-
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageH1" visible 1 
 3F10: set_car vehicle component "MessageE2" visible 1
 3F10: set_car vehicle component "MessageA3" visible 1
 3F10: set_car vehicle component "MessageD4" visible 1
-3F10: set_car vehicle component "MessageI5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageI5" visible 1 
 3F10: set_car vehicle component "MessageN6" visible 1
 3F10: set_car vehicle component "MessageG7" visible 1
-3F10: set_car vehicle component "MessageBLANK8" visible 1
 3F10: set_car vehicle component "Message59" visible 1
-3F10: set_car vehicle component "MessageBLANK10" visible 1
 WAIT 10
 //glow for message to display
 3F18: set_car vehicle component "MessageH1" glow 1
@@ -303,23 +264,16 @@ wait 0
 return
 
 :WestMessage
-
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageH1" visible 1 
 3F10: set_car vehicle component "MessageE2" visible 1
 3F10: set_car vehicle component "MessageA3" visible 1
 3F10: set_car vehicle component "MessageD4" visible 1
-3F10: set_car vehicle component "MessageI5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageI5" visible 1 
 3F10: set_car vehicle component "MessageN6" visible 1
 3F10: set_car vehicle component "MessageG7" visible 1
-3F10: set_car vehicle component "MessageBLANK8" visible 1
 3F10: set_car vehicle component "MessageW9" visible 1
-3F10: set_car vehicle component "MessageBLANK10" visible 1
 WAIT 10
 //glow for message to display
 3F18: set_car vehicle component "MessageH1" glow 1
@@ -334,23 +288,16 @@ wait 0
 return
 
 :EastMessage
-
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageH1" visible 1 
 3F10: set_car vehicle component "MessageE2" visible 1
 3F10: set_car vehicle component "MessageA3" visible 1
 3F10: set_car vehicle component "MessageD4" visible 1
-3F10: set_car vehicle component "MessageI5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageI5" visible 1 
 3F10: set_car vehicle component "MessageN6" visible 1
 3F10: set_car vehicle component "MessageG7" visible 1
-3F10: set_car vehicle component "MessageBLANK8" visible 1
 3F10: set_car vehicle component "MessageE9" visible 1
-3F10: set_car vehicle component "MessageBLANK10" visible 1
 WAIT 10
 //glow for message to display
 3F18: set_car vehicle component "MessageH1" glow 1

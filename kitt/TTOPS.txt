@@ -1353,27 +1353,19 @@ return
 { how to write a message on kitts message board 
 10 blocks Left to right 
 "Message" is the name of the frame then character, lastly block
-36 total characters, spaces are named blank, (five)5 = letter s , (Zero)0 = letter o
+36 total characters, (five)5 = letter s , (Zero)0 = letter o
 example "Message05" would place a 0 in the 5th block from the left 
-be sure to hide the blanks before putting a message in!
 }
 
-//HIDE BLANKS FOR LETTERS WE ARE USING
-for step10 = 1 to 10
-3F11: set_car vehicle component "MessageBlank" index step10 visible 0
-end
 wait 0
 //message to display
 3F10: set_car vehicle component "MessageE1" visible 1 
 3F10: set_car vehicle component "MessageJ2" visible 1
 3F10: set_car vehicle component "MessageT3" visible 1
-3F10: set_car vehicle component "MessageBLANK4" visible 1
-3F10: set_car vehicle component "MessageL5" visible 1 //ZERO
+3F10: set_car vehicle component "MessageL5" visible 1
 3F10: set_car vehicle component "MessageE6" visible 1
 3F10: set_car vehicle component "MessageF7" visible 1
 3F10: set_car vehicle component "MessageT8" visible 1
-3F10: set_car vehicle component "MessageBLANK9" visible 1
-3F10: set_car vehicle component "MessageBLANK10" visible 1
 WAIT 10
 //glow for message to display
 3F18: set_car vehicle component "MessageE1" glow 1
@@ -1400,7 +1392,6 @@ for step10 = 1 to 10
 3F19: set_car vehicle component "Message7" index step10 glow 0 
 3F19: set_car vehicle component "Message8" index step10 glow 0 
 3F19: set_car vehicle component "Message9" index step10 glow 0 
-3F19: set_car vehicle component "MessageBlank" index step10 glow 0 
 3F19: set_car vehicle component "MessageA" index step10 glow 0 
 3F19: set_car vehicle component "MessageB" index step10 glow 0 
 3F19: set_car vehicle component "MessageC" index step10 glow 0 
@@ -1435,7 +1426,6 @@ for step10 = 1 to 10
 3F11: set_car vehicle component "Message7" index step10 visible 0
 3F11: set_car vehicle component "Message8" index step10 visible 0
 3F11: set_car vehicle component "Message9" index step10 visible 0
-3F11: set_car vehicle component "MessageBlank" index step10 visible 1
 3F11: set_car vehicle component "MessageA" index step10 visible 0
 3F11: set_car vehicle component "MessageB" index step10 visible 0
 3F11: set_car vehicle component "MessageC" index step10 visible 0

@@ -29,8 +29,16 @@ while true
         04C4: create_coordinate x y z from_actor $PLAYER_ACTOR offset 2.0 0.0 0.0
         0172: angle = actor $PLAYER_ACTOR z_angle
         vehicle = Car.Create(model, x, y, z)   
-        0175: set_car vehicle z_angle_to angle              
-
+        0175: set_car vehicle z_angle_to angle      
+        3F44: car vehicle update_handling        
+3F10: set_car vehicle component "chute1" visible 0 
+3F10: set_car vehicle component "chute2" visible 0  
+3F10: set_car vehicle component "chute3" visible 0  
+3F10: set_car vehicle component "chute4" visible 0 
+3F10: set_car vehicle component "chute5" visible 0 
+3F10: set_car vehicle component "chute6" visible 0 
+3F10: set_car vehicle component "chute7" visible 0 
+3F10: set_car vehicle component "chute8" visible 0  
         for x = 255 downto 75
 3F12: set car vehicle component "TTopL_Glass_hi" alpha x
 3F12: set car vehicle component "TTopR_Glass_hi" alpha x
@@ -48,11 +56,16 @@ stream_custom_script "kitt/Scanner.s" vehicle
 stream_custom_script "kitt/Speedo.s" vehicle 
 stream_custom_script "kitt/TurningRadius.s" vehicle 
 stream_custom_script "kitt/Compass.s" vehicle
-stream_custom_script "kitt/TTops.s" vehicle    
-stream_custom_script "kitt/windowtint.s" vehicle 
-stream_custom_script "kitt/oxygen.s" vehicle 
+//stream_custom_script "kitt/TTops.s" vehicle    
+//stream_custom_script "kitt/windowtint.s" vehicle 
+//stream_custom_script "kitt/oxygen.s" vehicle 
+stream_custom_script "kitt/menu.s" vehicle
+stream_custom_script "kitt/ski.s" vehicle 
+stream_custom_script "kitt/jump.s" vehicle 
 02AC: set_car  vehicle immunities  1  1  1  1  1
 053F: set_car  vehicle tires_vulnerable  0
+03ED: set_car vehicle not_damaged_when_upside_down 1
+
 
         02D4: car vehicle turn_off_engine
 wait 0 
