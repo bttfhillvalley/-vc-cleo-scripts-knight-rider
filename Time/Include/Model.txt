@@ -1,9 +1,0 @@
-:LoadModel
-Model.Load(0@)
-038B: load_requested_models
-while not Model.Available(0@)
-    wait 10
-end
-1@ = Car.Create(0@, 0, 0, 4000.0)
-Model.Destroy(0@)
-cleo_return 1 1@

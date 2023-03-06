@@ -1,5 +1,0 @@
-:AnimateComponents
-return
-
-:RemoveComponents
-return

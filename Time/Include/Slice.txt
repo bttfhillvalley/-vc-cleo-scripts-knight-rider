@@ -1,3 +1,0 @@
-{$INCLUDE ../../Common/CleoConstants.txt}
-{$INCLUDE Variables.txt}
-

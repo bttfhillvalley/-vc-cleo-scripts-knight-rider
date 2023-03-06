@@ -1,3 +1,0 @@
-:ResetEffects
-// Nothing for now
-return
