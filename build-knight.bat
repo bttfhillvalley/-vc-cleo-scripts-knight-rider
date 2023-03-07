@@ -23,7 +23,6 @@ for /f "tokens=2*" %%a in ('REG QUERY "HKLM\SOFTWARE\WOW6432Node\Microsoft\Windo
 echo Compiling scripts...
 :: Main scripts
 call :Compile KITTSpawn .cs
-call :Compile DisplayToggle .cs
 
 :: KITT RandomLEDBars scripts
 call :Compile Kitt\RandomLEDBars\RandomLEDBar1 .s
