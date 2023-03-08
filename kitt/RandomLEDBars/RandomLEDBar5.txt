@@ -3,11 +3,11 @@
 {$INCLUDE ../../Common/CleoConstants.txt}
 0000: 
 :RandomLEDBars
-int step12
-int random12
+int frame
+int random
 
 
-03A4: script_name 'RNDBAR4'
+03A4: script_name 'RNBAR4'
 while true 
     wait 10
     if
@@ -23,25 +23,101 @@ end
 if
 Engine_IO == 1 
 then
-gosub @random_EGT
-
+gosub @random_ocb3
+gosub @random_struct
+gosub @random_ocb2
+gosub @random_lasercharge
+gosub @random_ocb1
+gosub @random_cputemp
 wait 0
 end
 return
 
-:random_EGT
+:random_struct
 wait 0
-0209: random12 = random_int_in_ranges 2 12
-
-for step12 = 1 to random12
-3F19: set_car vehicle component "EGT" index step12 glow 1
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "struct" index frame glow 1
 wait 0
 end
-
 wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "struct" index frame glow 0
+wait 10
+end
+wait 700
+return
 
-for step12 = random12 downto 1
-3F19: set_car vehicle component "EGT" index step12 glow 0
+:random_cputemp
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "cputemp" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "cputemp" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_lasercharge
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "lasercharge" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "lasercharge" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_ocb1
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "ocb1" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "ocb1" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_ocb2
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "ocb2" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "ocb2" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_ocb3
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "ocb3" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "ocb3" index frame glow 0
 wait 10
 end
 wait 700

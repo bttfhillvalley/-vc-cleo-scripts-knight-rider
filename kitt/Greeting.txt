@@ -17,7 +17,7 @@ while true
     end
     03C1: vehicle = player $PLAYER_CHAR car
 if
-00DD:   actor $player_actor driving_vehicle_type 239  
+00DD:   actor $player_actor driving_vehicle_type #KITT 
 then
 3F02: Engine_IO = car vehicle engine_status
 if and 

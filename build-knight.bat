@@ -30,33 +30,12 @@ call :Compile Kitt\RandomLEDBars\RandomLEDBar2 .s
 call :Compile Kitt\RandomLEDBars\RandomLEDBar3 .s
 call :Compile Kitt\RandomLEDBars\RandomLEDBar4 .s
 call :Compile Kitt\RandomLEDBars\RandomLEDBar5 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar6 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar7 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar8 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar9 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar10 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar11 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar12 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar13 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar14 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar15 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar16 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar17 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar18 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar19 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar20 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar21 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar22 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar23 .s
-call :Compile Kitt\RandomLEDBars\RandomLEDBar24 .s
 
 :: KITT scripts
-call :Compile Kitt\Compass .s
 call :Compile Kitt\Greeting .s
 call :Compile Kitt\Jump .s
-call :Compile Kitt\KittIgnition .s
+call :Compile Kitt\Ignition .s
 call :Compile Kitt\Menu .s
-call :Compile Kitt\Oxygen .s
 call :Compile Kitt\PopUpLights .s
 call :Compile Kitt\Pursuit .s
 call :Compile Kitt\RandomNumbers .s
@@ -64,15 +43,13 @@ call :Compile Kitt\Remote .s
 call :Compile Kitt\RollWindows .s
 call :Compile Kitt\Scanner .s
 call :Compile Kitt\Screen1 .s
-call :Compile Kitt\SetAlphas .s
+call :Compile Kitt\Setup .s
 call :Compile Kitt\Shifter .s
 call :Compile Kitt\Ski .s
 call :Compile Kitt\Speedo .s
 call :Compile Kitt\SurveillanceMode .s
 call :Compile Kitt\TTops .s
 call :Compile Kitt\TurningRadius .s
-call :Compile Kitt\Variables .s
-call :Compile Kitt\WindowTint .s
 echo The compiling process is now complete.
 pause
 exit /B 0

@@ -2,11 +2,38 @@
 if and
 0585:   in_car_fire_button_pressed
 3F3E:   car vehicle wheels_on_ground
-timera > 50
+timerb > 50
     then
-timera = 0
-0407: create_coordinate x y z from_car vehicle offset 0.0 0.0 1.5
+timerb = 0
+0407: create_coordinate x y z from_car vehicle offset 0.0 -3.0 -0.5
 0565: create_temporary_explosion_fire x y z type 1
+        end
+      return 
+
+:smokescreen
+if and
+0585:   in_car_fire_button_pressed
+timerb > 10
+    then
+timerb = 0
+0407: create_coordinate x y z from_car vehicle offset 0.0 -3.0 -0.5
+0437: scatter_particle 21 1.5 at x y z 0.0 0.0 0.0 //13
+0437: scatter_particle 21 1.5 at x y z 0.0 0.0 0.0 //13
+0437: scatter_particle 21 1.5 at x y z 0.0 0.0 0.0 //13
+        end
+      return 
+      
+:extinguisher
+if and
+0585:   in_car_fire_button_pressed
+//3F3E:   car vehicle wheels_on_ground
+timerb > 10
+    then
+timerb = 0
+0407: create_coordinate x y z from_car vehicle offset 0.0 -3.0 -0.5
+0437: scatter_particle 39 1.5 at x y z 0.0 0.0 0.0 //13
+031A: remove_all_fires
+
         end
       return 
       

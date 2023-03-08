@@ -165,17 +165,23 @@ jf @Select_12
 return 
 
 :Select_12
-if and
-timera < 800
+if 
 select == 12
+jf @Select_13
+gosub @extinguisher
+if
+timera < 800
 jf @Select_13
 05F5: call_scm_func @DrawTexture params_count 9 66 420.0 400.0 220.0 120.0 255 255 255 255
 return 
 
 :Select_13 
-if and
-timera < 800
+if 
 select == 13
+jf @Select_14
+gosub @smokescreen
+if
+timera < 800
 jf @Select_14
 05F5: call_scm_func @DrawTexture params_count 9 67 420.0 400.0 220.0 120.0 255 255 255 255
 return 
@@ -239,5 +245,5 @@ end
 end 
 return
 
-{$INCLUDE include/weapons.txt}
+{$INCLUDE include/features.txt}
 {$INCLUDE ../Common/DrawTexture.txt}

@@ -3,8 +3,9 @@
 {$INCLUDE ../../Common/CleoConstants.txt}
 0000: 
 :RandomLEDBars
-int step12
-int random12
+int frame
+int random
+int random2
 
 
 03A4: script_name 'RNDBAR'
@@ -16,8 +17,6 @@ while true
         continue
     end
     gosub @RandomLEDBarsLoop
-
-
 3F02: Engine_IO = car vehicle engine_status 
 end
 
@@ -25,24 +24,71 @@ end
 if
 Engine_IO == 1 
 then
+gosub @random_Compressor
+gosub @random_freeturb
 gosub @random_inlet
+gosub @random_EGT
+
 wait 0
 end
 return
 
 :random_inlet
 wait 0
-0209: random12 = random_int_in_ranges 2 12
-
-for step12 = 1 to random12
-3F19: set_car vehicle component "INLET" index step12 glow 1
+0209: random = random_int_in_ranges 2 12
+for frame = 1 to random
+3F19: set_car vehicle component "INLET" index frame glow 1
 wait 0
 end
-
 wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "INLET" index frame glow 0
+wait 10
+end
+wait 700
+return
 
-for step12 = random12 downto 1
-3F19: set_car vehicle component "INLET" index step12 glow 0
+:random_freeturb
+wait 0
+0209: random = random_int_in_ranges 2 12
+for frame = 1 to random
+3F19: set_car vehicle component "FreeTurb" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "FreeTurb" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_EGT
+wait 0
+0209: random = random_int_in_ranges 2 12
+
+for frame = 1 to random
+3F19: set_car vehicle component "EGT" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "EGT" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_Compressor
+wait 0
+0209: random2 = random_int_in_ranges 2 24
+for frame = 1 to random2
+3F19: set_car vehicle component "Compressor" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random2 downto 1
+3F19: set_car vehicle component "Compressor" index frame glow 0
 wait 10
 end
 wait 700

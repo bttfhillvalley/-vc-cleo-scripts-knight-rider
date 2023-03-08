@@ -6,14 +6,13 @@ const
 end
 0000:
 thread 'CARSPW2'
-int model =239
+
 int vehicle
-int led
+int frame
 float x
 float y
 float z
 float angle
-int step10
 
 while true
     wait 0
@@ -21,47 +20,28 @@ while true
         80E0:   not player $PLAYER_CHAR in_any_car
         is_key_pressed KEY_SPAWN // "."
     then
-        Model.Load(model)
+        Model.Load(#KITT)
         038B: load_requested_models
-        while not  Model.Available(model)
+        while not  Model.Available(#KITT)
             wait 0
         end           
         04C4: create_coordinate x y z from_actor $PLAYER_ACTOR offset 2.0 0.0 0.0
         0172: angle = actor $PLAYER_ACTOR z_angle
-        vehicle = Car.Create(model, x, y, z)   
+        vehicle = Car.Create(#KITT, x, y, z)   
         0175: set_car vehicle z_angle_to angle      
         3F44: car vehicle update_handling        
-3F10: set_car vehicle component "chute1" visible 0 
-3F10: set_car vehicle component "chute2" visible 0  
-3F10: set_car vehicle component "chute3" visible 0  
-3F10: set_car vehicle component "chute4" visible 0 
-3F10: set_car vehicle component "chute5" visible 0 
-3F10: set_car vehicle component "chute6" visible 0 
-3F10: set_car vehicle component "chute7" visible 0 
-3F10: set_car vehicle component "chute8" visible 0  
-        for x = 255 downto 75
-3F12: set car vehicle component "TTopL_Glass_hi" alpha x
-3F12: set car vehicle component "TTopR_Glass_hi" alpha x
-3F12: set car vehicle component "door_lf_hi_ok_wnd" alpha x 
-3F12: set car vehicle component "door_rf_hi_ok_wnd" alpha x
-3F12: set car vehicle component "backglass_hi" alpha x 
-3F12: set car vehicle component "frontglass_hi" alpha x
-end
-stream_custom_script "kitt/setalphas.s" vehicle
+{$INCLUDE kitt/include/setup.txt}
 stream_custom_script "kitt/SurveillanceMode.s" vehicle //needs to animate outside of car still
 stream_custom_script "kitt/Greeting.s" vehicle  //plays only first instance
 stream_custom_script "kitt/PopUpLights.s" vehicle
-stream_custom_script "kitt/Kittignition.s" vehicle 
+stream_custom_script "kitt/Ignition.s" vehicle 
 stream_custom_script "kitt/Scanner.s" vehicle 
 stream_custom_script "kitt/Speedo.s" vehicle 
-stream_custom_script "kitt/TurningRadius.s" vehicle 
-stream_custom_script "kitt/Compass.s" vehicle
+stream_custom_script "kitt/TurningRadius.s" vehicle
 //stream_custom_script "kitt/TTops.s" vehicle    
-//stream_custom_script "kitt/windowtint.s" vehicle 
-//stream_custom_script "kitt/oxygen.s" vehicle 
 stream_custom_script "kitt/menu.s" vehicle
 stream_custom_script "kitt/ski.s" vehicle 
-stream_custom_script "kitt/jump.s" vehicle 
+stream_custom_script "kitt/jump.s" vehicle  
 02AC: set_car  vehicle immunities  1  1  1  1  1
 053F: set_car  vehicle tires_vulnerable  0
 03ED: set_car vehicle not_damaged_when_upside_down 1
@@ -69,9 +49,9 @@ stream_custom_script "kitt/jump.s" vehicle
 
         02D4: car vehicle turn_off_engine
 wait 0 
-        Model.Destroy(model)
+        Model.Destroy(#KITT)
         wait 1000           
         
     end      
-end
   
+  end

@@ -3,8 +3,8 @@
 {$INCLUDE ../../Common/CleoConstants.txt}
 0000: 
 :RandomLEDBars
-int step12
-int random12
+int frame
+int random
 
 
 03A4: script_name 'RNDBAR2'
@@ -23,24 +23,85 @@ end
 if
 Engine_IO == 1 
 then
-gosub @random_freeturb
+gosub @random_Approach
+gosub @random_VoltsDC
+gosub @random_Propag
+gosub @random_SensorRange
+gosub @random_MPG
 wait 0
 end
 return
 
-:random_freeturb
+:random_VoltsDC
 wait 0
-0209: random12 = random_int_in_ranges 2 12
-
-for step12 = 1 to random12
-3F19: set_car vehicle component "FreeTurb" index step12 glow 1
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "VoltsDC" index frame glow 1
 wait 0
 end
-
 wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "VoltsDC" index frame glow 0
+wait 10
+end
+wait 700
+return
 
-for step12 = random12 downto 1
-3F19: set_car vehicle component "FreeTurb" index step12 glow 0
+:random_Propag
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "Propag" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "Propag" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_Approach
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "Approach" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "Approach" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_SensorRange
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "SensorRange" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "SensorRange" index frame glow 0
+wait 10
+end
+wait 700
+return
+
+:random_MPG
+wait 0
+0209: random = random_int_in_ranges 2 24
+for frame = 1 to random
+3F19: set_car vehicle component "MPG" index frame glow 1
+wait 0
+end
+wait 200
+for frame = random downto 1
+3F19: set_car vehicle component "MPG" index frame glow 0
 wait 10
 end
 wait 700

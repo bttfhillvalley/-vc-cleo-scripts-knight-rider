@@ -1,0 +1,96 @@
+for frame = 255 downto 75 //default window tint
+3F12: set car vehicle component "TTopL_Glass_hi" alpha frame
+3F12: set car vehicle component "TTopR_Glass_hi" alpha frame
+3F12: set car vehicle component "door_lf_hi_ok_wnd" alpha frame 
+3F12: set car vehicle component "door_rf_hi_ok_wnd" alpha frame
+3F12: set car vehicle component "backglass_hi" alpha frame 
+3F12: set car vehicle component "frontglass_hi" alpha frame
+end
+3F12: set car vehicle component "tailglass_hi" alpha 200 //tail light glass 
+wait 0
+for frame = 1 to 9
+3F11: set_car vehicle component "flames" index frame visible 0 //flame decals  (3 frames)
+3F11: set_car vehicle component "stars" index frame visible 0 //star decals (6 frames)
+3F13: set car vehicle component "chute" index frame alpha 250 //parachute (9 frames)
+3F11: set_car vehicle component "chute" index frame visible 0
+end
+3F10: set_car vehicle component "armysticker" visible 0 //army sticker decal
+3F12: set car vehicle component "oxygenled" alpha 150 //oxygen led
+wait 0
+for frame = 1 to 30
+3F13: set car vehicle component "EjectL" index frame alpha 150 //Left Ejector (12 frames)
+3F13: set car vehicle component "EjectR" index frame alpha 150 //Right Ejector (12 frames)
+3F13: set car vehicle component "Inlet" index frame alpha 150  //Inlet Temp (12 frames)
+3F13: set car vehicle component "FreeTurb" index frame alpha 150 //Free Turbine(12 frames)
+3F13: set car vehicle component "MassFlow" index frame alpha 150 //MassFlow LBS (12 frames)
+3F13: set car vehicle component "EGT" index frame alpha 150 //EGT (12 frames)
+3F13: set car vehicle component "FuelFlow" index frame alpha 150 //Fuel Flow GPH (12 frames)
+3F13: set car vehicle component "MainOil" index frame alpha 150 //Main Oil Pressure (12 frames)
+3F13: set car vehicle component "surveillance" index frame alpha 150 //Surveillance Mode (12 frames)
+3F13: set car vehicle component "TurnRadius" index frame alpha 150 //turning radius (15 frames)
+3F13: set car vehicle component "MPH" index frame alpha 150 //mph leds (20 frames)
+3F13: set car vehicle component "Compressor" index frame alpha 150 //Compressor Temp (24 frames)
+3F13: set car vehicle component "HYDSYS" index frame alpha 150 //HYD Syst Stress PGI (24 frames)
+3F13: set car vehicle component "VoltsDC" index frame alpha 150 //Volts DC (24 frames)
+3F13: set car vehicle component "Capstats" index frame alpha 150 //Capacity status (24 frames)
+3F13: set car vehicle component "Propag" index frame alpha 150 //Propagation Delay HRB (24 frames)
+3F13: set car vehicle component "Access" index frame alpha 150 //Access (24 frames)
+3F13: set car vehicle component "Approach" index frame alpha 150 //Approach Warning Sec (24 frames)
+3F13: set car vehicle component "RadarWatt" index frame alpha 150 //Radar Watts KW (24 frames)
+3F13: set car vehicle component "SensorRange" index frame alpha 150 //Sensor Range (24 frames)
+3F13: set car vehicle component "FuelGal" index frame alpha 150 //Fuel Gallons (24 frames)
+3F13: set car vehicle component "MPG" index frame alpha 150 //MI / Gallons (24 frames)
+3F13: set car vehicle component "RangeEst" index frame alpha 150 //Range Estimates (24 frames)
+3F13: set car vehicle component "lasercharge" index frame alpha 150 //Laser Charge (24 frames)
+3F13: set car vehicle component "cputemp" index frame alpha 150 //CPU Temp (24 frames)
+3F13: set car vehicle component "struct" index frame alpha 150 //Structural Integrity (24 frames)
+3F13: set car vehicle component "ocb1" index frame alpha 150 // Overhead Console Bar 1 (24 frames)
+3F13: set car vehicle component "ocb2" index frame alpha 150 // Overhead Console Bar 2 (24 frames)
+3F13: set car vehicle component "ocb3" index frame alpha 150 // Overhead Console Bar 3 (24 frames)
+3F13: set car vehicle component "RPM" index frame alpha 150 //RPM leds (29 frames)
+end
+wait 0  
+3F12: set car vehicle component "digitalspeedodigit10" alpha 250 //speedometer ones zero
+3F12: set car vehicle component "digitalspeedodigit20" alpha 250 //speedometer tens zero
+3F12: set car vehicle component "digitalspeedodigit30" alpha 250 //speedometer hundreds zero
+3F12: set car vehicle component "digitalRPMdigit10" alpha 250 //rpm hundreds zero
+3F12: set car vehicle component "digitalRPMdigit20" alpha 250 //rpm thousands zero
+3F12: set car vehicle component "digitalturndigit10" alpha 250 //turning radius fraction zero
+3F12: set car vehicle component "digitalturndot" alpha 250 //turning radius decimal
+3F12: set car vehicle component "digitalturndigit20" alpha 250 //turning radius ones zero
+3F12: set car vehicle component "digitalturndigit30" alpha 250 //turning radius tenss zero
+3F12: set car vehicle component "digitalturndigit40" alpha 250 //turning radius hundreds zero
+wait 0
+3F12: set car vehicle component "EjectLBTN" alpha 150 //Eject Left button
+3F12: set car vehicle component "EjectRBTN" alpha 150 //Eject Right button
+3F12: set car vehicle component "5FBTN" alpha 150 //5F button
+3F12: set car vehicle component "PAuxBTN" alpha 150 //PAux button
+3F12: set car vehicle component "6RMBTN" alpha 150 //6RM button
+3F12: set car vehicle component "7DlaBTN" alpha 150 //7Dla button
+3F12: set car vehicle component "PengBTN" alpha 150 //Peng button
+3F12: set car vehicle component "8PL1BTN" alpha 150 //8PL1 button
+3F12: set car vehicle component "H6BTN" alpha 150 //H6 button
+3F12: set car vehicle component "HTDDBTN" alpha 150 //H.T.D.D. button
+3F12: set car vehicle component "OilSlickBTN" alpha 150 //Oil Slick button
+3F12: set car vehicle component "SmokeRelBTN" alpha 150 //Smoke Release button
+3F12: set car vehicle component "TurboBoostBTN" alpha 150 //Turbo Boost button
+3F12: set car vehicle component "LicPlateBTN" alpha 150 //Licence Plate button
+3F12: set car vehicle component "SilentModeBTN" alpha 150 //Silent Mode button
+3F12: set car vehicle component "MicroJamBTN" alpha 150 //Micro Jam button
+3F12: set car vehicle component "LaserBTN" alpha 150 //Laser button
+3F12: set car vehicle component "SkiModeBTN" alpha 150 //Ski Mode button
+3F12: set car vehicle component "AutoRoofLBTN" alpha 150 //T-Top Left button
+3F12: set car vehicle component "AutoRoofRBTN" alpha 150 //T-Top Right button
+3F12: set car vehicle component "printerBTN" alpha 150 //Printer button
+wait 0
+3F12: set car vehicle component "AccessoryLights" alpha 150 //accessory lights
+3F12: set car vehicle component "S1Voice" alpha 150//voice box
+3F12: set car vehicle component "AutoCruise" alpha 150 //Auto Cruise Mode
+3F12: set car vehicle component "NormalCruise" alpha 150 //Normal Cruise Mode
+3F12: set car vehicle component "Pursuit" alpha 150 //pursuit mode
+3F12: set car vehicle component "PilotCenterLights" alpha 50 //center console lights
+3F12: set car vehicle component "Power" alpha 50  //Power center console light
+3F12: set car vehicle component "MinRPM" alpha 50 //Min RPM center console light
+3F12: set car vehicle component "FuelOn" alpha 50 //Fuel On center console light
+3F12: set car vehicle component "Ignitors" alpha 50 //Ignitors center console light
+wait 0

@@ -14,7 +14,7 @@ while true
         continue
     end
     if
-        80DD:   not actor $player_actor driving_vehicle_type 239
+        80DD:   not actor $player_actor driving_vehicle_type #KITT
     then
         continue
     end
