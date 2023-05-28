@@ -1,0 +1,48 @@
+{$CLEO .s}
+{$INCLUDE ../Common/CleoConstants.txt}
+0000:
+int vehicle
+float x
+float y
+float z
+
+while true
+    wait 0
+    if
+        80E0:   not player $PLAYER_CHAR driving
+    then
+        continue
+    end
+    vehicle = Actor.CurrentCar($PLAYER_ACTOR)
+    3F20: get_car vehicle orientation_to x y z 
+gosub @ski_left
+gosub @ski_right  
+end
+
+:ski_left
+if and
+        is_key_pressed 74 // "J"
+        3F3E:   car vehicle wheels_on_ground
+    timera > 10
+    then
+        timera = 0
+        y *= -0.0010
+        y += 0.05
+        3F3D: set_car vehicle ski_mode y
+        end
+      return  
+        
+        
+        
+:ski_right
+        if and
+        is_key_pressed 72 // "H"
+        timera > 10
+        3F3E:   car vehicle wheels_on_ground
+    then
+        timera = 0
+        y *= 0.0010
+        y += -0.05
+        3F3D: set_car vehicle ski_mode y  
+        end 
+        return       

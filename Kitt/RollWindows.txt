@@ -1,0 +1,151 @@
+{$CLEO .s}
+{$INCLUDE Variables.txt}
+{$INCLUDE ../Common/CleoConstants.txt}
+0000:
+int LWindow
+int RWindow
+
+0000:
+while true 
+    wait 10
+    if
+        not Player.Defined($PLAYER_CHAR)
+    then
+        continue
+    end
+    if
+        80DD:   not actor $player_actor driving_vehicle_type 239
+    then
+        continue
+    end
+    03C1: vehicle = player $PLAYER_CHAR car
+    gosub @CheckKeyL
+    gosub @CheckKeyR
+3F02: Engine_IO = car vehicle engine_status 
+end
+
+
+:CheckKeyL
+if and
+Engine_IO == 1
+    is_key_pressed KEY_LEFTWINDOW
+    timera > 500
+then
+    timera = 0
+    // Toggle Windows
+    if
+        LWindow == 0
+    then
+        LWindow = 1
+        gosub @LWindow_down
+    else
+        LWindow = 0
+        gosub @LWindow_up
+    end
+end
+return
+
+:CheckKeyR
+if and
+Engine_IO == 1
+    is_key_pressed KEY_RIGHTWINDOW
+    timera > 500
+then
+    timera = 0
+    // Toggle Window
+    if
+        RWindow == 0
+    then
+        RWindow = 1
+        gosub @RWindow_down
+    else
+        RWindow = 0
+        gosub @RWindow_up
+    end
+end
+return
+
+:LWindow_Down                             
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos -0.0 0.0 0.0
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle 0.0 0.0 90.0                                          
+wait 10
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.0 0.0 -0.054
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle 0.0 0.0 89.0
+wait 10 
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.048 0.02 -0.216
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle -15.0 0.0 90.0
+wait 10
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.072 0.02 -0.324
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle -21.0 0.0 90.0
+wait 10
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.080 0.0 -0.378
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle -22.0 0.0 90.0
+wait 10
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.080 0.04 -0.450
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle -24.0 0.0 90.0  
+wait 10 
+return
+
+
+:LWindow_Up 
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.080 0.04 -0.450
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle -24.0 0.0 90.0
+wait 10
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.080 0.0 -0.378
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle -22.0 0.0 90.0
+wait 10
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.072 0.02 -0.324
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle -21.0 0.0 90.0 
+wait 10 
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.048 0.02 -0.216
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle -15.0 0.0 90.0
+wait 10
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos 0.0 0.0 -0.054
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle 0.0 0.0 89.0
+wait 10 
+3F14: set_car vehicle component "door_lf_hi_ok_wnd_dummy" pos -0.0 0.0 0.0
+3F16: set_car vehicle component "door_lf_hi_ok_wnd_dummy" angle 0.0 0.0 90.0                                          
+wait 10
+return  
+
+:RWindow_Down                             
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.0 0.0 0.0
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle 0.0 0.0 -90.0                                          
+wait 10
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.0 0.0 -0.054
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle 0.0 0.0 -89.0  
+wait 10 
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.048 0.02 -0.216
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle -15.0 0.0 -90.0
+wait 10
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.072 0.02 -0.324
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle -21.0 0.0 -90.0
+wait 10
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.080 0.0 -0.378
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle -22.0 0.0 -90.0
+wait 10                                                                           
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.080 0.04 -0.450
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle -24.0 0.0 -90.0  
+wait 10 
+return
+
+:RWindow_Up 
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.080 0.04 -0.450
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle -24.0 0.0 -90.0
+wait 10
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.080 0.0 -0.378
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle -22.0 0.0 -90.0
+wait 10
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.072 0.02 -0.324
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle -21.0 0.0 -90.0
+wait 10 
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.048 0.02 -0.216
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle -15.0 0.0 -90.0
+wait 10
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.0 0.0 -0.054
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle 0.0 0.0 -89.0
+wait 10 
+3F14: set_car vehicle component "door_rf_hi_ok_wnd_dummy" pos -0.0 0.0 0.0
+3F16: set_car vehicle component "door_rf_hi_ok_wnd_dummy" angle 0.0 0.0 -90.0                                        
+wait 10  
+return

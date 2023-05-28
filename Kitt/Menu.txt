@@ -1,0 +1,249 @@
+{$CLEO .s}
+{$INCLUDE Variables.txt}
+{$INCLUDE ../Common/CleoConstants.txt}
+const
+KEY_left = 188 // "<"
+KEY_right = 190 // ">"
+KEY_select = 189 // "-"
+end
+int Select = 0
+int wheels
+int chute
+int selected
+int sethealth
+
+0000:
+while true 
+    wait 10
+    if
+        not Player.Defined($PLAYER_CHAR)
+    then
+        continue
+    end
+    if
+        80DD:   not actor $player_actor driving_vehicle_type 239
+    then
+        continue
+    end
+    03C1: vehicle = player $PLAYER_CHAR car
+    3F02: Engine_IO = car vehicle engine_status 
+3F2E: wheels = car vehicle drive_wheels_on_ground
+sethealth = Actor.Health($PLAYER_ACTOR)
+    gosub @CheckKey_Right
+    gosub @CheckKey_Left
+    gosub @flying
+    gosub @setthehealth
+end
+
+
+
+
+
+return
+
+:CheckKey_Right
+if and
+Engine_IO == 1
+    is_key_pressed KEY_right
+    timera > 500
+    then 
+    timera = 0 
+Select += 1
+end
+gosub @Select_1
+return
+
+
+:CheckKey_Left
+if and
+Engine_IO == 1
+    is_key_pressed KEY_left
+    timera > 500
+    then 
+    timera = 0 
+Select -= 1
+end
+gosub @Select_1
+return
+
+
+:Select_1 
+if 
+select == 1
+jf @Select_2
+gosub @tint_on
+if
+timera < 800
+jf @Select_2
+05F5: call_scm_func @DrawTexture params_count 9 29 420.0 400.0 220.0 120.0 255 255 255 255
+return
+
+:Select_2 
+if and
+timera < 800
+select == 2
+jf @Select_3
+05F5: call_scm_func @DrawTexture params_count 9 30 420.0 400.0 220.0 120.0 255 255 255 255
+return
+
+:Select_3 
+if and
+timera < 800
+select == 3
+jf @Select_4
+05F5: call_scm_func @DrawTexture params_count 9 31 420.0 400.0 220.0 120.0 255 255 255 255
+return
+
+:Select_4
+if and
+timera < 800
+select == 4
+jf @Select_5
+05F5: call_scm_func @DrawTexture params_count 9 32 420.0 400.0 220.0 120.0 255 255 255 255
+return
+
+:Select_5 
+if and
+timera < 800
+select == 5
+jf @Select_6
+05F5: call_scm_func @DrawTexture params_count 9 33 420.0 400.0 220.0 120.0 255 255 255 255
+return
+
+:Select_6 
+if and
+timera < 800
+select == 6
+jf @Select_7
+05F5: call_scm_func @DrawTexture params_count 9 34 420.0 400.0 220.0 120.0 255 255 255 255
+return
+ 
+:Select_7 
+if 
+select == 7
+jf @Select_8
+gosub @parachute
+if
+timera < 800
+jf @Select_8
+05F5: call_scm_func @DrawTexture params_count 9 35 420.0 400.0 220.0 120.0 255 255 255 255
+return
+
+:Select_8 
+if and
+timera < 800
+select == 8
+jf @Select_9
+05F5: call_scm_func @DrawTexture params_count 9 36 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_9 
+if and
+timera < 800
+select == 9
+jf @Select_10
+05F5: call_scm_func @DrawTexture params_count 9 37 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_10 
+if and
+timera < 800
+select == 10
+jf @Select_11
+05F5: call_scm_func @DrawTexture params_count 9 38 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_11 
+if 
+select == 11
+jf @Select_12
+gosub @flamethrower
+if
+timera < 800
+jf @Select_12
+05F5: call_scm_func @DrawTexture params_count 9 39 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_12
+if 
+select == 12
+jf @Select_13
+gosub @extinguisher
+if
+timera < 800
+jf @Select_13
+05F5: call_scm_func @DrawTexture params_count 9 40 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_13 
+if 
+select == 13
+jf @Select_14
+gosub @smokescreen
+if
+timera < 800
+jf @Select_14
+05F5: call_scm_func @DrawTexture params_count 9 41 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_14 
+if and
+timera < 800
+select == 14
+jf @Select_15
+05F5: call_scm_func @DrawTexture params_count 9 42 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_15 
+if and
+timera < 800
+select == 15
+jf @Select_16
+05F5: call_scm_func @DrawTexture params_count 9 43 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_16 
+if and
+timera < 800
+select == 16
+jf @Select_17
+05F5: call_scm_func @DrawTexture params_count 9 44 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+:Select_17 
+if and
+timera < 800
+select == 17
+jf @Select_18
+05F5: call_scm_func @DrawTexture params_count 9 45 420.0 400.0 220.0 120.0 255 255 255 255
+return 
+
+
+:Select_18 
+if 
+select == 18
+jf @Select_reset
+gosub @setoxygen
+if
+timera < 800
+jf @Select_reset
+05F5: call_scm_func @DrawTexture params_count 9 46 420.0 400.0 220.0 120.0 255 255 255 255
+return    
+
+:Select_reset 
+wait 0
+if
+select == -1 //should never happen
+then
+select = 18 //actual last option
+else
+if
+select == 19 //invalid last option
+then
+select = 1 //first option
+end
+end 
+return
+
+{$INCLUDE include/features.txt}
+{$INCLUDE ../Common/DrawTexture.txt}

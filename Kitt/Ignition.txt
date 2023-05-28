@@ -1,0 +1,406 @@
+{$CLEO .s}
+{$INCLUDE Variables.txt}
+{$INCLUDE ../Common/CleoConstants.txt}
+0000:
+int startup
+int frame
+int random
+
+0000:
+while true 
+    wait 10
+    if
+        not Player.Defined($PLAYER_CHAR)
+    then
+        continue
+    end
+    if
+        80DD:   not actor $player_actor driving_vehicle_type 239
+    then
+    3F16: set_car vehicle component "shifter" angle -15.0 0.0 0.0 //park  
+        continue
+    end
+    03C1: vehicle = player $PLAYER_CHAR car
+    gosub @Engine_Off
+    gosub @Engine_On
+3F02: Engine_IO = car vehicle engine_status 
+end
+
+:Engine_Off
+wait 0
+if
+engine_io == 0
+then
+3F16: set_car vehicle component "shifter" angle -15.0 0.0 0.0  //park 
+0459: terminate_all_scripts_with_this_name 'SHIFTER'
+//RPM dots off
+for frame = 1 to 29 
+3F19: set_car vehicle component "RPM" index frame glow 0
+end
+//rpm digits off
+for frame = 10 to 29
+3F11: set_car vehicle component "digitalRPMdigit" index frame visible 0
+3F19: set_car vehicle component "digitalRPMdigit" index frame glow 0 
+end
+//display rpm zeros no glow
+3F10: set_car vehicle component "digitalRPMdigit10" visible 1 
+3F10: set_car vehicle component "digitalRPMdigit20" visible 1  
+
+//!!!temporary section Start!!!!
+3F10: set_car vehicle component "s3pedals" visible 0 //season 3 pedal set
+3F18: set_car vehicle component "S1Voice" glow 0
+//!!!temporary section End!!!!
+
+//oxygen
+3F16: set_car vehicle component "oxygen" angle 0.0 0.0 0.0  
+3F16: set_car vehicle component "oxygenled" angle 0.0 0.0 0.0
+3F18: set_car vehicle component "oxygenled" glow 0  
+
+//pursuit mode 
+0459: terminate_all_scripts_with_this_name 'PURSUIT'
+
+//Auto Cruise Off
+3F18: set_car vehicle component "AutoCruise" glow 0
+
+//normal cruise off
+3F18: set_car vehicle component "NormalCruise" glow 0
+
+//pursuit off
+3F18: set_car vehicle component "Pursuit" glow 0
+
+//Center Lights Off
+3F18: set_car vehicle component "Power" glow 0
+3F18: set_car vehicle component "MinRPM" glow 0
+3F18: set_car vehicle component "FuelOn" glow 0
+3F18: set_car vehicle component "Ignitors" glow 0
+3F18: set_car vehicle component "PilotCenterLights" glow 0
+
+//Accessory Lights Off
+3F18: set_car vehicle component "AccessoryLights" glow 0
+
+//overhead lights
+3F18: set_car vehicle component "overheadlights" glow 0
+3F10: set_car vehicle component "overheadlights" visible 0
+
+//kill all led bars
+0459: terminate_all_scripts_with_this_name 'RNDBAR'
+0459: terminate_all_scripts_with_this_name 'RNDBAR1'
+0459: terminate_all_scripts_with_this_name 'RNDBAR2'
+0459: terminate_all_scripts_with_this_name 'RNDBAR3'
+0459: terminate_all_scripts_with_this_name 'RNDBAR4'
+0459: terminate_all_scripts_with_this_name 'RNDBAR5'
+
+for frame = 1 to 25
+3F19: set_car vehicle component "INLET" index frame glow 0
+3F19: set_car vehicle component "FreeTurb" index frame glow 0
+3F19: set_car vehicle component "MassFlow" index frame glow 0
+3F19: set_car vehicle component "EGT" index frame glow 0
+3F19: set_car vehicle component "FuelFlow" index frame glow 0
+3F19: set_car vehicle component "MainOil" index frame glow 0
+3F19: set_car vehicle component "Compressor" index frame glow 0
+3F19: set_car vehicle component "HYDSYS" index frame glow 0
+3F19: set_car vehicle component "VoltsDC" index frame glow 0
+3F19: set_car vehicle component "Capstats" index frame glow 0
+3F19: set_car vehicle component "Propag" index frame glow 0
+3F19: set_car vehicle component "Access" index frame glow 0
+3F19: set_car vehicle component "Approach" index frame glow 0
+3F19: set_car vehicle component "RadarWatt" index frame glow 0
+3F19: set_car vehicle component "SensorRange" index frame glow 0
+3F19: set_car vehicle component "FuelGal" index frame glow 0
+3F19: set_car vehicle component "MPG" index frame glow 0
+3F19: set_car vehicle component "RangeEst" index frame glow 0
+3F19: set_car vehicle component "struct" index frame glow 0
+3F19: set_car vehicle component "cputemp" index frame glow 0
+3F19: set_car vehicle component "lasercharge" index frame glow 0
+3F19: set_car vehicle component "ocb1" index frame glow 0
+3F19: set_car vehicle component "ocb2" index frame glow 0
+3F19: set_car vehicle component "ocb3" index frame glow 0
+end
+
+
+
+
+
+//remove overhead numbers
+for frame = 0 to 10
+3F11: set_car vehicle component "y1" index frame visible 0
+3F11: set_car vehicle component "y2" index frame visible 0
+3F11: set_car vehicle component "y3" index frame visible 0
+3F11: set_car vehicle component "y4" index frame visible 0
+3F11: set_car vehicle component "y5" index frame visible 0
+3F11: set_car vehicle component "y6" index frame visible 0
+3F19: set_car vehicle component "y1" index frame glow 0 
+3F19: set_car vehicle component "y2" index frame glow 0 
+3F19: set_car vehicle component "y3" index frame glow 0 
+3F19: set_car vehicle component "y4" index frame glow 0 
+3F19: set_car vehicle component "y5" index frame glow 0 
+3F19: set_car vehicle component "y6" index frame glow 0 
+end
+
+//remove screen 1 (add blank version of this for when screen is missing)
+for frame = 1 to 15
+3F11: set_car vehicle component "screen1" index frame visible 0
+end
+
+//allow engine to be able to turn on
+startup = 1
+end
+    wait 0  
+return
+
+
+:Engine_On 
+wait 0   
+if
+startup == 1
+then
+if 
+engine_io == 1
+jf @Engine_Off
+//overhead console Random Number Generator on startup
+0209: random = random_int_in_ranges 0 9
+3F11: set_car vehicle component "y1" index random visible 1
+3F19: set_car vehicle component "y1" index random glow 1 
+0209: random = random_int_in_ranges 0 9
+3F11: set_car vehicle component "y2" index random visible 1
+3F19: set_car vehicle component "y2" index random glow 1 
+0209: random = random_int_in_ranges 0 9
+3F11: set_car vehicle component "y3" index random visible 1
+3F19: set_car vehicle component "y3" index random glow 1 
+0209: random = random_int_in_ranges 0 9
+3F11: set_car vehicle component "y4" index random visible 1
+3F19: set_car vehicle component "y4" index random glow 1 
+0209: random = random_int_in_ranges 0 9
+3F11: set_car vehicle component "y5" index random visible 1 
+3F19: set_car vehicle component "y5" index random glow 1
+0209: random = random_int_in_ranges 0 9
+3F11: set_car vehicle component "y6" index random visible 1
+3F19: set_car vehicle component "y6" index random glow 1 
+wait 200
+
+//light up all random bars (need to add overheads to this section)
+for frame = 1 to 25
+3F19: set_car vehicle component "INLET" index frame glow 1
+3F19: set_car vehicle component "FreeTurb" index frame glow 1
+3F19: set_car vehicle component "MassFlow" index frame glow 1
+3F19: set_car vehicle component "EGT" index frame glow 1
+3F19: set_car vehicle component "FuelFlow" index frame glow 1
+3F19: set_car vehicle component "MainOil" index frame glow 1
+3F19: set_car vehicle component "Compressor" index frame glow 1
+3F19: set_car vehicle component "HYDSYS" index frame glow 1
+3F19: set_car vehicle component "VoltsDC" index frame glow 1
+3F19: set_car vehicle component "Capstats" index frame glow 1
+3F19: set_car vehicle component "Propag" index frame glow 1
+3F19: set_car vehicle component "Access" index frame glow 1
+3F19: set_car vehicle component "Approach" index frame glow 1
+3F19: set_car vehicle component "RadarWatt" index frame glow 1
+3F19: set_car vehicle component "SensorRange" index frame glow 1
+3F19: set_car vehicle component "FuelGal" index frame glow 1
+3F19: set_car vehicle component "MPG" index frame glow 1
+3F19: set_car vehicle component "RangeEst" index frame glow 1
+3F19: set_car vehicle component "struct" index frame glow 1
+3F19: set_car vehicle component "cputemp" index frame glow 1
+3F19: set_car vehicle component "lasercharge" index frame glow 1
+3F19: set_car vehicle component "ocb1" index frame glow 1
+3F19: set_car vehicle component "ocb2" index frame glow 1
+3F19: set_car vehicle component "ocb3" index frame glow 1
+end
+
+//Accessory Lights On
+3F18: set_car vehicle component "AccessoryLights" glow 1
+3F18: set_car vehicle component "PilotCenterLights" glow 1
+
+//rpm pre warm up
+3F18: set_car vehicle component "digitalRPMdigit10" glow 1
+3F18: set_car vehicle component "digitalRPMdigit20" glow 1 
+
+//overhead lights
+3F10: set_car vehicle component "overheadlights" visible 1
+3F18: set_car vehicle component "overheadlights" glow 1
+
+//start screen 1 animation loop
+stream_custom_script "kitt/screen1.s" vehicle
+
+//animate top center lights
+wait 300
+3F18: set_car vehicle component "MinRPM" glow 1
+3F18: set_car vehicle component "FuelOn" glow 1
+wait 300
+3F18: set_car vehicle component "Power" glow 1
+3F18: set_car vehicle component "MinRPM" glow 0
+wait 300
+3F18: set_car vehicle component "Ignitors" glow 1
+wait 300
+3F18: set_car vehicle component "MinRPM" glow 1
+3F18: set_car vehicle component "FuelOn" glow 0
+wait 300
+3F18: set_car vehicle component "FuelOn" glow 1
+3F18: set_car vehicle component "Ignitors" glow 0
+wait 300
+3F18: set_car vehicle component "Ignitors" glow 1
+
+//RPM Warm up animation
+3F10: set_car vehicle component "digitalRPMdigit10" visible 1 
+3F10: set_car vehicle component "digitalRPMdigit20" visible 1
+3F18: set_car vehicle component "digitalRPMdigit10" glow 1
+3F18: set_car vehicle component "digitalRPMdigit20" glow 1
+WAIT 0
+3F18: set_car vehicle component "digitalRPMdigit10" glow 0
+3F10: set_car vehicle component "digitalRPMdigit10" visible 0 
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit11" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit11" glow 0
+3F10: set_car vehicle component "digitalRPMdigit11" visible 0
+3F10: set_car vehicle component "digitalRPMdigit12" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit12" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit12" glow 0
+3F10: set_car vehicle component "digitalRPMdigit12" visible 0
+3F10: set_car vehicle component "digitalRPMdigit13" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit13" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit13" glow 0
+3F10: set_car vehicle component "digitalRPMdigit13" visible 0
+3F10: set_car vehicle component "digitalRPMdigit14" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit14" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit14" glow 0
+3F10: set_car vehicle component "digitalRPMdigit14" visible 0
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit15" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit15" glow 0
+3F10: set_car vehicle component "digitalRPMdigit15" visible 0
+3F10: set_car vehicle component "digitalRPMdigit16" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit16" glow 1
+3F18: set_car vehicle component "RPM1" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit16" glow 0
+3F10: set_car vehicle component "digitalRPMdigit16" visible 0
+3F10: set_car vehicle component "digitalRPMdigit17" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit17" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit17" glow 0
+3F10: set_car vehicle component "digitalRPMdigit17" visible 0
+3F10: set_car vehicle component "digitalRPMdigit18" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit18" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit18" glow 0
+3F10: set_car vehicle component "digitalRPMdigit18" visible 0
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit19" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit20" glow 0
+3F10: set_car vehicle component "digitalRPMdigit20" visible 0
+3F18: set_car vehicle component "digitalRPMdigit21" glow 1
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F18: set_car vehicle component "digitalRPMdigit19" glow 0
+3F10: set_car vehicle component "digitalRPMdigit19" visible 0
+3F10: set_car vehicle component "digitalRPMdigit10" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit10" glow 1  
+3F18: set_car vehicle component "RPM2" glow 1
+wait 1
+3F10: set_car vehicle component "digitalRPMdigit10" visible 0 
+3F18: set_car vehicle component "digitalRPMdigit10" glow 0
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit11" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit11" glow 0
+3F10: set_car vehicle component "digitalRPMdigit11" visible 0
+3F10: set_car vehicle component "digitalRPMdigit12" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit12" glow 1
+3F18: set_car vehicle component "RPM3" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit12" glow 0
+3F10: set_car vehicle component "digitalRPMdigit12" visible 0
+3F10: set_car vehicle component "digitalRPMdigit13" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit13" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit13" glow 0
+3F10: set_car vehicle component "digitalRPMdigit13" visible 0
+3F10: set_car vehicle component "digitalRPMdigit14" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit14" glow 1
+3F18: set_car vehicle component "RPM4" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit14" glow 0
+3F10: set_car vehicle component "digitalRPMdigit14" visible 0
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit15" glow 1  
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit15" glow 0
+3F10: set_car vehicle component "digitalRPMdigit15" visible 0
+3F10: set_car vehicle component "digitalRPMdigit16" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit16" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit16" glow 0
+3F10: set_car vehicle component "digitalRPMdigit16" visible 0
+3F10: set_car vehicle component "digitalRPMdigit17" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit17" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit17" glow 0
+3F10: set_car vehicle component "digitalRPMdigit17" visible 0
+3F10: set_car vehicle component "digitalRPMdigit18" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit18" glow 1
+wait 1
+3F18: set_car vehicle component "digitalRPMdigit18" glow 0
+3F10: set_car vehicle component "digitalRPMdigit18" visible 0
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "digitalRPMdigit19" glow 1
+stream_custom_script "kitt/shifter.s" vehicle
+
+
+//turn off all the random bars before starting their scripts(need to add overheads to this section) 
+for frame = 1 to 25
+3F19: set_car vehicle component "INLET" index frame glow 0
+3F19: set_car vehicle component "FreeTurb" index frame glow 0
+3F19: set_car vehicle component "MassFlow" index frame glow 0
+3F19: set_car vehicle component "EGT" index frame glow 0
+3F19: set_car vehicle component "FuelFlow" index frame glow 0
+3F19: set_car vehicle component "MainOil" index frame glow 0
+3F19: set_car vehicle component "Compressor" index frame glow 0
+3F19: set_car vehicle component "HYDSYS" index frame glow 0
+3F19: set_car vehicle component "VoltsDC" index frame glow 0
+3F19: set_car vehicle component "Capstats" index frame glow 0
+3F19: set_car vehicle component "Propag" index frame glow 0
+3F19: set_car vehicle component "Access" index frame glow 0
+3F19: set_car vehicle component "Approach" index frame glow 0
+3F19: set_car vehicle component "RadarWatt" index frame glow 0
+3F19: set_car vehicle component "SensorRange" index frame glow 0
+3F19: set_car vehicle component "FuelGal" index frame glow 0
+3F19: set_car vehicle component "MPG" index frame glow 0
+3F19: set_car vehicle component "RangeEst" index frame glow 0
+3F19: set_car vehicle component "struct" index frame glow 0
+3F19: set_car vehicle component "cputemp" index frame glow 0
+3F19: set_car vehicle component "lasercharge" index frame glow 0
+3F19: set_car vehicle component "ocb1" index frame glow 0
+3F19: set_car vehicle component "ocb2" index frame glow 0
+3F19: set_car vehicle component "ocb3" index frame glow 0   
+end                                      
+
+//start all random bar scripts (individual scripts are due to game executing one line at a time this allows for all the random bars to be independant)
+stream_custom_script "kitt/RandomLEDBars/RandomLEDBar1.s" vehicle
+stream_custom_script "kitt/RandomLEDBars/RandomLEDBar2.s" vehicle
+stream_custom_script "kitt/RandomLEDBars/RandomLEDBar3.s" vehicle
+stream_custom_script "kitt/RandomLEDBars/RandomLEDBar4.s" vehicle
+stream_custom_script "kitt/RandomLEDBars/RandomLEDBar5.s" vehicle
+wait 0
+//allow for additional features here
+stream_custom_script "kitt/pursuit.s" vehicle 
+stream_custom_script "kitt/rollwindows.s" vehicle   
+
+//cruise
+3F18: set_car vehicle component "AutoCruise" glow 0
+
+//temporary area for voice box glow
+3F18: set_car vehicle component "S1Voice" glow 1
+
+
+
+//car has now fully turned on
+wait 0
+startup = 0
+end      
+return  
+

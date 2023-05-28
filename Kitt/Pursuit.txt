@@ -1,0 +1,156 @@
+{$CLEO .s}
+{$INCLUDE Variables.txt}
+{$INCLUDE ../Common/CleoConstants.txt}
+0000:
+int Pursuit
+int wheels
+int backward
+int jumpbutton
+float vehicle_speed
+
+03A4: script_name 'PURSUIT'
+
+0000:
+while true 
+    wait 10
+    if
+        not Player.Defined($PLAYER_CHAR)
+    then
+        continue
+    end
+    if
+        80DD:   not actor $player_actor driving_vehicle_type 239
+    then
+        continue
+    end
+    03C1: vehicle = player $PLAYER_CHAR car
+    gosub @EngineOffCheck
+    gosub @Pursuit_Boost
+    gosub @CheckKey_L_Shift
+    gosub @CheckKey_R_Shift
+    gosub @CheckKey_backward
+    gosub @Pursuit_Boost_backward
+3F02: Engine_IO = car vehicle engine_status 
+02E3: vehicle_speed = car vehicle speed
+3F2E: wheels = car vehicle drive_wheels_on_ground
+end
+
+
+:EngineOffCheck
+   if
+Pursuit == 0
+then
+3F18: set_car vehicle component "AutoCruise" glow 0
+3F18: set_car vehicle component "NormalCruise" glow 1
+3F18: set_car vehicle component "Pursuit" glow 0
+backward = 0
+Pursuit = 0
+wait 0
+    end
+return  
+
+:CheckKey_L_Shift
+if and
+Engine_IO == 1
+    is_key_pressed 160
+    timera > 10
+then
+    timera = 0
+    // Toggle Pursuit
+    if
+        Pursuit == 0
+    then
+        Pursuit = 1  
+    else
+        Pursuit = 0
+//
+    end
+end
+return
+
+:CheckKey_backward
+if and
+Engine_IO == 1
+00E1:   player 0 pressed_button 14
+then
+    if
+        backward == 0
+    then
+        backward = 1  
+    else
+        backward = 0
+//
+    end
+end
+return
+
+:CheckKey_R_Shift
+if and
+Engine_IO == 1 
+    is_key_pressed 161
+    timera > 10
+then
+    timera = 0
+    // Toggle Pursuit
+    if
+        Pursuit == 0
+    then
+        Pursuit = 1  
+    else
+        Pursuit = 0
+//
+    end
+end
+return
+
+:Pursuit_Boost
+if AND
+Pursuit == 1
+backward == 0
+wheels > 0
+then
+3F18: set_car vehicle component "AutoCruise" glow 0
+3F18: set_car vehicle component "NormalCruise" glow 0
+3F18: set_car vehicle component "Pursuit" glow 1
+for x = vehicle_speed to 130.0 step 10.0
+3F25: apply_forward_force x car vehicle
+  wait 0
+    end
+    Pursuit = 0
+    backward = 0
+      end
+wait 0 
+return
+
+:Pursuit_Boost_backward
+if AND
+Pursuit == 1
+backward == 1
+wheels > 0
+then
+3F18: set_car vehicle component "AutoCruise" glow 0
+3F18: set_car vehicle component "NormalCruise" glow 0
+3F18: set_car vehicle component "Pursuit" glow 1
+for x = vehicle_speed downto -130.0 step 10.0
+3F25: apply_forward_force x car vehicle
+  wait 0
+    end
+backward = 0
+Pursuit = 0
+      end
+wait 0 
+return
+
+
+
+
+
+
+
+
+
+
+
+
+
+

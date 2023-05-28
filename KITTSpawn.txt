@@ -1,0 +1,56 @@
+{$CLEO .cs}
+{$INCLUDE Common/CleoConstants.txt}
+{$INCLUDE Common/CustomOpcodes.txt}
+const
+    KEY_SPAWN = 90 // "z"
+end
+0000:
+thread 'CARSPW2'
+
+int vehicle
+int frame
+float x
+float y
+float z
+float angle
+
+while true
+    wait 0
+    if and
+        80E0:   not player $PLAYER_CHAR in_any_car
+        is_key_pressed KEY_SPAWN // "."
+    then
+        Model.Load(239)
+        038B: load_requested_models
+        while not  Model.Available(239)
+            wait 0
+        end           
+        04C4: create_coordinate x y z from_actor $PLAYER_ACTOR offset 2.0 0.0 0.0
+        0172: angle = actor $PLAYER_ACTOR z_angle
+        vehicle = Car.Create(239, x, y, z)   
+        0175: set_car vehicle z_angle_to angle      
+        3F44: car vehicle update_handling               
+{$INCLUDE kitt/include/setup.txt}
+stream_custom_script "kitt/SurveillanceMode.s" vehicle //broken
+stream_custom_script "kitt/Greeting.s" vehicle  //plays only first instance
+stream_custom_script "kitt/PopUpLights.s" vehicle
+stream_custom_script "kitt/Ignition.s" vehicle 
+stream_custom_script "kitt/Scanner.s" vehicle 
+stream_custom_script "kitt/Speedo.s" vehicle 
+stream_custom_script "kitt/TurningRadius.s" vehicle
+//stream_custom_script "kitt/TTops.s" vehicle    
+stream_custom_script "kitt/menu.s" vehicle
+stream_custom_script "kitt/ski.s" vehicle 
+stream_custom_script "kitt/jump.s" vehicle }  
+02AC: set_car  vehicle immunities  1  1  1  1  1
+053F: set_car  vehicle tires_vulnerable  0
+03ED: set_car vehicle not_damaged_when_upside_down 1  
+        02D4: car vehicle turn_off_engine
+        0AB3: var TIME_MACHINE = vehicle
+wait 0                    
+        Model.Destroy(239)
+        wait 1000           
+        
+    end      
+  
+  end

@@ -1,0 +1,1100 @@
+
+{$CLEO .s}
+{$INCLUDE Variables.txt}
+{$INCLUDE ../Common/CleoConstants.txt}
+int var1
+int var2
+int var3
+int var4
+int rpm
+int frame
+03A4: script_name 'SHIFTER'
+0000:
+while true 
+    wait 10
+    if
+        not Player.Defined($PLAYER_CHAR)
+    then
+        continue
+    end
+    if
+        80DD:   not actor $player_actor driving_vehicle_type 239
+    then
+        continue
+    end  
+    gosub @CheckKey_Reverse
+03C1: vehicle = player $PLAYER_CHAR car
+3F02: Engine_IO = car vehicle engine_status
+02E3: 1@ = car vehicle speed 
+end
+
+:rpmreset
+//RPM dots off   
+for frame = 1 to 29 
+3F19: set_car vehicle component "RPM" index frame glow 0    
+end
+//digits off
+for frame = 10 to 29
+3F19: set_car vehicle component "digitalRPMdigit" index frame glow 1 
+3F11: set_car vehicle component "digitalRPMdigit" index frame visible 0
+end 
+return
+3F16: rotate_car_part "shifter" angle -5.0 0.0 0.0 car vehicle
+
+:neutral
+if
+    1@ < 1.0
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1 
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1 
+3F16: set_car vehicle component "shifter" angle -5.0 0.0 0.0  //neutral 
+end
+return
+:1st_1
+if
+    1@ > 1.0                
+then  
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1 
+3F10: set_car vehicle component "digitalRPMdigit10" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1 
+3F16: set_car vehicle component "shifter" angle 0.0 0.0 0.0  //drive
+
+end
+return
+:1st_2                                
+if
+  1@ > 2.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit14" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1  
+end
+return
+:1st_3
+if                                        
+  1@ > 3.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit18" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+end
+return
+:1st_4
+if                                          
+  1@ > 4.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit23" visible 1
+3F10: set_car vehicle component "digitalRPMdigit12" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+end
+return
+:1st_5
+if
+  1@ > 5.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit23" visible 1
+3F10: set_car vehicle component "digitalRPMdigit16" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1
+ 
+end
+return
+:1st_6
+if
+  1@ > 6.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit24" visible 1
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1 
+3F18: set_car vehicle component "RPM13" glow 1 
+end
+return
+:1st_7
+if                                              
+  1@ > 7.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit24" visible 1
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1 
+3F18: set_car vehicle component "RPM13" glow 1 
+3F18: set_car vehicle component "RPM14" glow 1 
+end
+return
+:1st_8
+if
+  1@ > 8.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit24" visible 1
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1 
+3F18: set_car vehicle component "RPM13" glow 1 
+3F18: set_car vehicle component "RPM14" glow 1
+3F18: set_car vehicle component "RPM15" glow 1 
+3F18: set_car vehicle component "RPM16" glow 1
+end
+return
+:1st_9
+if
+  1@ > 9.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit25" visible 1
+3F10: set_car vehicle component "digitalRPMdigit13" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1 
+3F18: set_car vehicle component "RPM13" glow 1 
+3F18: set_car vehicle component "RPM14" glow 1
+3F18: set_car vehicle component "RPM15" glow 1 
+3F18: set_car vehicle component "RPM16" glow 1
+3F18: set_car vehicle component "RPM17" glow 1 
+3F18: set_car vehicle component "RPM18" glow 1 
+end
+return
+:1st_10
+if
+  1@ > 10.0 // 1-13 20 - 77        
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit25" visible 1
+3F10: set_car vehicle component "digitalRPMdigit16" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1 
+3F18: set_car vehicle component "RPM13" glow 1 
+3F18: set_car vehicle component "RPM14" glow 1
+3F18: set_car vehicle component "RPM15" glow 1 
+3F18: set_car vehicle component "RPM16" glow 1
+3F18: set_car vehicle component "RPM17" glow 1 
+3F18: set_car vehicle component "RPM18" glow 1
+3F18: set_car vehicle component "RPM19" glow 1 
+3F18: set_car vehicle component "RPM20" glow 1
+end
+return
+:1st_11
+if
+  1@ > 11.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit26" visible 1
+3F10: set_car vehicle component "digitalRPMdigit12" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1 
+3F18: set_car vehicle component "RPM13" glow 1 
+3F18: set_car vehicle component "RPM14" glow 1
+3F18: set_car vehicle component "RPM15" glow 1 
+3F18: set_car vehicle component "RPM16" glow 1
+3F18: set_car vehicle component "RPM17" glow 1 
+3F18: set_car vehicle component "RPM18" glow 1
+3F18: set_car vehicle component "RPM19" glow 1 
+3F18: set_car vehicle component "RPM20" glow 1
+3F18: set_car vehicle component "RPM21" glow 1 
+3F18: set_car vehicle component "RPM22" glow 1
+end
+return
+:1st_12
+if
+  1@ > 12.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit26" visible 1
+3F10: set_car vehicle component "digitalRPMdigit16" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1 
+3F18: set_car vehicle component "RPM13" glow 1 
+3F18: set_car vehicle component "RPM14" glow 1
+3F18: set_car vehicle component "RPM15" glow 1 
+3F18: set_car vehicle component "RPM16" glow 1
+3F18: set_car vehicle component "RPM17" glow 1 
+3F18: set_car vehicle component "RPM18" glow 1
+3F18: set_car vehicle component "RPM19" glow 1 
+3F18: set_car vehicle component "RPM20" glow 1
+3F18: set_car vehicle component "RPM21" glow 1 
+3F18: set_car vehicle component "RPM22" glow 1 
+3F18: set_car vehicle component "RPM23" glow 1 
+3F18: set_car vehicle component "RPM24" glow 1 
+
+end
+return
+:1st_13
+if
+  1@ > 13.0 // 1-13 20 - 77
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit27" visible 1
+3F10: set_car vehicle component "digitalRPMdigit17" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1 
+3F18: set_car vehicle component "RPM13" glow 1 
+3F18: set_car vehicle component "RPM14" glow 1
+3F18: set_car vehicle component "RPM15" glow 1 
+3F18: set_car vehicle component "RPM16" glow 1
+3F18: set_car vehicle component "RPM17" glow 1 
+3F18: set_car vehicle component "RPM18" glow 1
+3F18: set_car vehicle component "RPM19" glow 1 
+3F18: set_car vehicle component "RPM20" glow 1
+3F18: set_car vehicle component "RPM21" glow 1 
+3F18: set_car vehicle component "RPM22" glow 1 
+3F18: set_car vehicle component "RPM23" glow 1 
+3F18: set_car vehicle component "RPM24" glow 1 
+3F18: set_car vehicle component "RPM25" glow 1 
+3F18: set_car vehicle component "RPM26" glow 1 
+3F18: set_car vehicle component "RPM27" glow 1 
+3F18: set_car vehicle component "RPM28" glow 1 
+end
+return
+:2nd_1
+if
+  1@ > 14.0 // 14 - 22 13 - 44    
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit13" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+end
+return
+:2nd_2
+if
+  1@ > 15.0 // 14 - 22 13 - 44
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit17" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+end
+return
+:2nd_3
+if
+  1@ > 16.0 // 14 - 22 13 - 44
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+end
+return
+:2nd_4
+if
+  1@ > 17.0 // 14 - 22 13 - 44
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+end
+return                                            
+:2nd_5
+if
+  1@ > 18.0 // 14 - 22 13 - 44
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+
+
+end
+return
+:2nd_6
+if
+  1@ > 19.0 // 14 - 22 13 - 44
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit23" visible 1
+3F10: set_car vehicle component "digitalRPMdigit13" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+
+end
+return
+:2nd_7
+if
+  1@ > 20.0 // 14 - 22 13 - 44
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit23" visible 1
+3F10: set_car vehicle component "digitalRPMdigit17" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1
+end
+return
+:2nd_8                                                              
+if
+  1@ > 21.0 // 14 - 22 13 - 44
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit24" visible 1
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1
+3F18: set_car vehicle component "RPM13" glow 1
+end
+return
+:2nd_9
+if
+  1@ > 22.0 // 14 - 22 13 - 44   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit24" visible 1
+3F10: set_car vehicle component "digitalRPMdigit14" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+3F18: set_car vehicle component "RPM9" glow 1
+3F18: set_car vehicle component "RPM10" glow 1
+3F18: set_car vehicle component "RPM11" glow 1
+3F18: set_car vehicle component "RPM12" glow 1
+3F18: set_car vehicle component "RPM13" glow 1
+3F18: set_car vehicle component "RPM14" glow 1
+3F18: set_car vehicle component "RPM15" glow 1
+end
+return
+:3rd_1
+if
+  1@ > 23.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit10" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+end
+return
+:3rd_2
+if
+  1@ > 24.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit12" visible 1  
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+end
+return
+:3rd_3
+if
+  1@ > 25.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit14" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+end
+return
+:3rd_4
+if
+  1@ > 26.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+ 
+end
+return
+:3rd_5
+if
+  1@ > 27.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit18" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1 
+end
+return
+:3rd_6
+if
+  1@ > 28.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+end
+return
+:3rd_7
+if   
+  1@ > 29.0 // 23 - 34  10-28   
+then                                            
+gosub @rpmreset                                    
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit10" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1 
+end
+return
+:3rd_8
+if
+  1@ > 30.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+end
+return
+:3rd_9
+if
+  1@ > 31.0 // 23 - 34  10-28   
+then                                              
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit14" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+end
+return
+:3rd_10
+if
+  1@ > 32.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+end
+return
+:3rd_11
+if
+  1@ > 33.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit16" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+end
+return
+:3rd_12
+if
+  1@ > 34.0 // 23 - 34  10-28   
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit18" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+3F18: set_car vehicle component "RPM8" glow 1
+end
+return
+:4th_1
+if
+  1@ > 35.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit20" visible 1
+3F10: set_car vehicle component "digitalRPMdigit18" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+end
+return
+:4th_2
+if
+  1@ > 36.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit20" visible 1
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+end
+return
+:4th_3
+if
+  1@ > 37.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+end
+return
+:4th_4
+if
+  1@ > 38.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit13" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+end
+return
+:4th_5
+if
+  1@ > 39.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+end
+return
+:4th_6
+if
+  1@ > 40.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit17" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1 
+end
+return
+:4th_7
+if
+  1@ > 41.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+end
+return
+:4th_8
+if
+  1@ > 42.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+end
+return
+:4th_9
+if
+  1@ > 43.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit13" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+end
+return
+:4th_10
+if
+  1@ > 44.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit14" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+end
+return
+:4th_11
+if
+  1@ > 45.0 // 35 - 45  8-25  
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit22" visible 1
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+3F18: set_car vehicle component "RPM6" glow 1
+3F18: set_car vehicle component "RPM7" glow 1
+end   
+return
+:5th_1      
+if                              
+  1@ > 46.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit20" visible 1
+3F10: set_car vehicle component "digitalRPMdigit16" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+end
+return
+:5th_2      
+if                              
+  1@ > 47.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit20" visible 1
+3F10: set_car vehicle component "digitalRPMdigit17" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+end
+return
+:5th_3      
+if                              
+  1@ > 48.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit20" visible 1
+3F10: set_car vehicle component "digitalRPMdigit18" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+end
+return
+:5th_4      
+if                              
+  1@ > 49.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit20" visible 1
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+end
+return
+:5th_5      
+if                              
+  1@ > 50.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit10" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+end
+return
+:5th_6      
+if                              
+  1@ > 51.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit11" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+end
+return
+:5th_7      
+if                              
+  1@ > 52.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit12" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+end
+return
+:5th_8      
+if                              
+  1@ > 53.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit13" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1  
+end
+return
+:5th_9      
+if                              
+  1@ > 54.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit14" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+end
+return
+:5th_10      
+if                              
+  1@ > 55.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit15" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+end
+return
+:5th_11      
+if                              
+  1@ > 56.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit16" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+end
+return
+:5th_12      
+if                              
+  1@ > 57.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit17" visible 1
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1 
+end
+return
+:5th_13      
+if                              
+  1@ > 58.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit18" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+end
+return
+:5th_14      
+if                              
+  1@ > 59.0 
+then
+gosub @rpmreset
+3F10: set_car vehicle component "digitalRPMdigit21" visible 1
+3F10: set_car vehicle component "digitalRPMdigit19" visible 1 
+3F18: set_car vehicle component "RPM1" glow 1
+3F18: set_car vehicle component "RPM2" glow 1
+3F18: set_car vehicle component "RPM3" glow 1 
+3F18: set_car vehicle component "RPM4" glow 1
+3F18: set_car vehicle component "RPM5" glow 1
+end
+return
+
+
+:CheckKey_Reverse
+wait 0
+if
+00E1:   player 0 pressed_button 14
+then
+3F16: set_car vehicle component "shifter" angle -10.0 0.0 0.0  //reverse
+else
+    gosub @neutral
+    gosub @1st_1
+    gosub @1st_2
+    gosub @1st_3
+    gosub @1st_4
+    gosub @1st_5
+    gosub @1st_6
+    gosub @1st_7
+    gosub @1st_8
+    gosub @1st_9
+    gosub @1st_10
+    gosub @1st_11
+    gosub @1st_12
+    gosub @1st_13
+    gosub @2nd_1
+    gosub @2nd_2
+    gosub @2nd_3
+    gosub @2nd_4
+    gosub @2nd_5
+    gosub @2nd_6
+    gosub @2nd_7
+    gosub @2nd_8 
+    gosub @2nd_9
+    gosub @3rd_1
+    gosub @3rd_2
+    gosub @3rd_3
+    gosub @3rd_4
+    gosub @3rd_5
+    gosub @3rd_6
+    gosub @3rd_7
+    gosub @3rd_8    
+    gosub @3rd_9    
+    gosub @3rd_10    
+    gosub @3rd_11    
+    gosub @3rd_12 
+    gosub @4th_1
+    gosub @4th_2  
+    gosub @4th_3  
+    gosub @4th_4  
+    gosub @4th_5  
+    gosub @4th_6  
+    gosub @4th_7  
+    gosub @4th_8  
+    gosub @4th_9 
+    gosub @4th_10  
+    gosub @4th_11 
+    gosub @5th_1
+    gosub @5th_2
+    gosub @5th_3
+    gosub @5th_4
+    gosub @5th_5
+    gosub @5th_6
+    gosub @5th_7
+    gosub @5th_8 
+    gosub @5th_9
+    gosub @5th_10
+    gosub @5th_11
+    gosub @5th_12
+    gosub @5th_13
+    gosub @5th_14
+end
+return 

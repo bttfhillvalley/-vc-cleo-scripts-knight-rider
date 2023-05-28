@@ -1,0 +1,56 @@
+{$CLEO .cs}
+0000:
+int onmission = -1
+int $ONMISSION
+while true
+    while $ONMISSION == onmission
+        wait 0
+    end
+    // Reload textures everytime $ONMISSION changes
+    onmission = $ONMISSION
+    wait 0 // Somewhat necessary to prevent crashing
+    0390: load_txd_dictionary 'knight'
+    //1-4 is free (voicebox?)
+    038F: load_texture '0' as 5 //RED SPEEDOMETER NUMBER 0
+    038F: load_texture '1' as 6 //RED SPEEDOMETER NUMBER 1
+    038F: load_texture '2' as 7 //RED SPEEDOMETER NUMBER 2
+    038F: load_texture '3' as 8 //RED SPEEDOMETER NUMBER 3
+    038F: load_texture '4' as 9 //RED SPEEDOMETER NUMBER 4
+    038F: load_texture '5' as 10 //RED SPEEDOMETER NUMBER 5
+    038F: load_texture '6' as 11 //RED SPEEDOMETER NUMBER 6
+    038F: load_texture '7' as 12 //RED SPEEDOMETER NUMBER 7
+    038F: load_texture '8' as 13 //RED SPEEDOMETER NUMBER 8
+    038F: load_texture '9' as 14 //RED SPEEDOMETER NUMBER 9
+    038F: load_texture 'dot' as 15  //RED SPEEDOMETER DOT
+    038F: load_texture 'digbk' as 16  //RED SPEEDOMETER NUMBER BACKGROUND
+    038F: load_texture 'y0' as 17 //YELLOW SPEEDOMETER NUMBER 0
+    038F: load_texture 'y1' as 18 //YELLOW SPEEDOMETER NUMBER 1
+    038F: load_texture 'y2' as 19 //YELLOW SPEEDOMETER NUMBER 2
+    038F: load_texture 'y3' as 20 //YELLOW SPEEDOMETER NUMBER 3
+    038F: load_texture 'y4' as 21 //YELLOW SPEEDOMETER NUMBER 4
+    038F: load_texture 'y5' as 22 //YELLOW SPEEDOMETER NUMBER 5
+    038F: load_texture 'y6' as 23 //YELLOW SPEEDOMETER NUMBER 6
+    038F: load_texture 'y7' as 24 //YELLOW SPEEDOMETER NUMBER 7
+    038F: load_texture 'y8' as 25 //YELLOW SPEEDOMETER NUMBER 8
+    038F: load_texture 'y9' as 26 //YELLOW SPEEDOMETER NUMBER 9
+    038F: load_texture 'ydot' as 27 //YELLOW SPEEDOMETER DOT
+    038F: load_texture 'ydgbk' as 28 //YELLOW SPEEDOMETER NUMBER BACKGROUND
+    038F: load_texture 'opt1' as 29 //
+    038F: load_texture 'opt2' as 30 //
+    038F: load_texture 'opt3' as 31 //
+    038F: load_texture 'opt4' as 32 //
+    038F: load_texture 'opt5' as 33 //
+    038F: load_texture 'opt6' as 34 //
+    038F: load_texture 'opt7' as 35 //
+    038F: load_texture 'opt8' as 36 //
+    038F: load_texture 'opt9' as 37 //
+    038F: load_texture 'opt10' as 38 //
+    038F: load_texture 'opt11' as 39 //
+    038F: load_texture 'opt12' as 40 //
+    038F: load_texture 'opt13' as 41 //
+    038F: load_texture 'opt14' as 42 //
+    038F: load_texture 'opt15' as 43 //
+    038F: load_texture 'opt16' as 44 //
+    038F: load_texture 'opt17' as 45 //
+    038F: load_texture 'opt18' as 46 //
+end
