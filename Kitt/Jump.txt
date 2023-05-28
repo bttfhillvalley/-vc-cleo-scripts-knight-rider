@@ -30,7 +30,7 @@ vehicle_speed > 40.0  //80
         timera > 500
     then
         timera = 0
-        3F26: apply_upward_force 1800.0 car vehicle
+        3F26: set_car vehicle upward_force 1800.0
     end    
 return
 
@@ -43,7 +43,7 @@ not vehicle_speed > 20.0  //0 - 30
         timera > 500
     then
         timera = 0
-        3F26: apply_upward_force 1200.0 car vehicle
+        3F26: set_car vehicle upward_force 1200.0
     end    
 return
 
@@ -58,6 +58,6 @@ not vehicle_speed > 39.0  //under 80
         timera > 500
     then
         timera = 0
-        3F26: apply_upward_force 1500.0 car vehicle
+        3F26: set_car vehicle upward_force 1500.0
     end    
 return    
